@@ -9,4 +9,23 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
-  
+
+
+
+
+
+// Function to update the input field's placeholder
+function updatePlaceholder(userID) {
+    const inputElement = document.getElementById("idInput");
+    if (userID) {
+        inputElement.placeholder = `${userID}`;
+    } else {
+        inputElement.placeholder = "İstifadəçi nömrəsi";
+    }
+}
+
+// Retrieve userID from Chrome storage
+chrome.storage.sync.get("userID", function (data) {
+    const userID = data.userID;
+    updatePlaceholder(userID);
+});
