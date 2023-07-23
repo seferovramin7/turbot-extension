@@ -54,3 +54,52 @@ if (container) {
 } else {
     console.error('Container element not found.');
 }
+
+
+
+
+
+
+// Function to update the dropdown options with the retrieved car list
+function updateDropdown(carList) {
+    const dropdown = document.getElementById("carDropdown");
+
+    // Clear existing options
+    dropdown.innerHTML = "";
+
+    // Add new options based on the retrieved car list
+    carList.forEach(car => {
+        const option = document.createElement("option");
+        option.text = car;
+        dropdown.add(option);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Replace 'YOUR_BACKEND_API_URL' with the actual URL of your backend service
+    fetch('http://localhost:8080/list/car?chatId=508914176')
+        .then(response => response.json())
+        .then(data => {
+            const carLinksDropdown = document.getElementById('carLinksDropdown');
+            const carLabel = document.getElementById('carLabel');
+
+            // Populate the dropdown with car links
+            data.forEach(link => {
+                const option = document.createElement('option');
+                option.text = link;
+                carLinksDropdown.appendChild(option);
+            });
+            if (data.length === 0) {
+                // If empty, hide the label and select element
+                carLabel.style.display = 'none';
+                carLinksDropdown.style.display = 'none';
+            } else {
+                // If not empty, show the label and select element
+                carLabel.style.display = 'block';
+                carLinksDropdown.style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching car links:', error);
+        });
+});

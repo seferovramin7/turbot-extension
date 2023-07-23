@@ -61,3 +61,115 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+
+/* Reset default styles for select */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px;
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+}
+
+/* Styling for the dropdown arrow */
+select::-ms-expand {
+    display: none; /* Remove IE default arrow */
+}
+
+/* Style the dropdown arrow for non-IE browsers */
+select::after {
+    content: "\25BC"; /* Unicode character for the down arrow */
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Style when the select element is focused */
+select:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    border-color: #4c90ff;
+}
+
+/* Style when an option is hovered */
+select option:hover {
+    background-color: #f9f9f9;
+}
+
+/* Style when an option is selected */
+select option:checked {
+    background-color: #4c90ff;
+    color: #fff;
+}
+
+
+/* styles.css */
+
+/* Style the label for the select */
+label {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+/* Reset default styles for select */
+select {
+    margin-bottom: 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    width: 200px;
+    text-align: center;
+}
+
+/* Styling for the dropdown arrow */
+select::-ms-expand {
+    display: none; /* Remove IE default arrow */
+}
+
+/* Style the dropdown arrow for non-IE browsers */
+select::after {
+    content: "\25BC"; /* Unicode character for the down arrow */
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Style when the select element is focused */
+select:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    border-color: #4c90ff;
+}
+
+/* Style when an option is hovered */
+select option:hover {
+    background-color: #f9f9f9;
+}
+
+/* Style when an option is selected */
+select option:checked {
+    background-color: #4c90ff;
+    color: #fff;
+}
