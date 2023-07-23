@@ -2,11 +2,15 @@
     "name": "Turbot",
     "manifest_version": 3,
     "version": "1.0",
+  "icons": {
+    "48": "turbo.png"
+  },
     "permissions": [
       "storage"
     ],
     "action": {
       "default_popup": "popup.html"
+
     },
     "background": {
       "service_worker": "background.js"
