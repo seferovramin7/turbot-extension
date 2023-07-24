@@ -14,6 +14,6 @@ chrome.runtime.onInstalled.addListener(function() {
           document.body.appendChild(div);
         }
       });
-      
+
   });
   

@@ -24,8 +24,8 @@ function updatePlaceholder(userID) {
     }
 }
 
-// Retrieve userID from Chrome storage
 chrome.storage.sync.get("userID", function (data) {
     const userID = data.userID;
     updatePlaceholder(userID);
 });
+

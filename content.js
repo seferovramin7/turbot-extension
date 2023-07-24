@@ -1,11 +1,24 @@
-let userID;
+var userId;
+
+
+chrome.storage.sync.get("userID", function (result) {
+    // The result is an object with the key-value pairs from the storage.
+    // In this case, result.userId will give you the value of the "userId" key.
+    userId = result.userID;
+
+    // Now you can use the userId string as needed.
+    console.log("User ID: " + userId);
+
+    // Any code that requires the userId should be placed here or called from here.
+});
+
 
 function sendProductPriceToServer() {
     const productPriceDiv = document.querySelector('.product-price__i');
 
     if (productPriceDiv) {
         const productPrice = productPriceDiv.innerText.trim();
-        const endpointUrl = 'http://localhost:8080/save?price=' + encodeURIComponent(productPrice) + '&id=' + userID;
+        const endpointUrl = 'http://localhost:8080/save?price=' + encodeURIComponent(productPrice) + '&id=' + userId;
         fetch(endpointUrl)
             .then(response => response.json())
             .then(data => {
@@ -56,10 +69,6 @@ if (container) {
 }
 
 
-
-
-
-
 // Function to update the dropdown options with the retrieved car list
 function updateDropdown(carList) {
     const dropdown = document.getElementById("carDropdown");
@@ -76,8 +85,7 @@ function updateDropdown(carList) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Replace 'YOUR_BACKEND_API_URL' with the actual URL of your backend service
-    fetch('http://localhost:8080/list/car?chatId=508914176')
+    fetch('http://localhost:8080/list/car?chatId=' + userId)
         .then(response => response.json())
         .then(data => {
             const carLinksDropdown = document.getElementById('carLinksDropdown');
