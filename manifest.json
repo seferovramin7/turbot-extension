@@ -6,14 +6,12 @@
     "48": "turbo.png"
   },
     "permissions": [
-      "storage"
+      "storage",
+      "tabs"
     ],
     "action": {
       "default_popup": "popup.html"
 
-    },
-    "background": {
-      "service_worker": "background.js"
     },
     "host_permissions": [
       "https://*/*",

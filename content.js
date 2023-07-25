@@ -84,30 +84,28 @@ function updateDropdown(carList) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8080/list/car?chatId=' + userId)
-        .then(response => response.json())
-        .then(data => {
-            const carLinksDropdown = document.getElementById('carLinksDropdown');
-            const carLabel = document.getElementById('carLabel');
 
-            // Populate the dropdown with car links
-            data.forEach(link => {
-                const option = document.createElement('option');
-                option.text = link;
-                carLinksDropdown.appendChild(option);
-            });
-            if (data.length === 0) {
-                // If empty, hide the label and select element
-                carLabel.style.display = 'none';
-                carLinksDropdown.style.display = 'none';
-            } else {
-                // If not empty, show the label and select element
-                carLabel.style.display = 'block';
-                carLinksDropdown.style.display = 'block';
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching car links:', error);
-        });
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     fetch('http://localhost:8080/list/search?chatId=' + userId)
+//         .then(response => response.json())
+//         .then(data => {
+//             const carLinksDropdown = document.getElementById('searchLinksDropdown');
+//             data.forEach(link => {
+//                 const option = document.createElement('option');
+//                 option.text = link;
+//                 carLinksDropdown.appendChild(option);
+//             });
+//             carLinksDropdown.addEventListener('change', function () {
+//                 const selectedOption = carLinksDropdown.options[carLinksDropdown.selectedIndex];
+//                 const url = selectedOption.value;
+//                 if (url) {
+//                     // Open the URL in a new tab/window
+//                     window.open(url, '_blank');
+//                 }
+//             });
+//         })
+//         .catch(error => {
+//             console.error('Error fetching car links:', error);
+//         });
+// });
+
