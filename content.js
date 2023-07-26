@@ -4,12 +4,8 @@ chrome.storage.sync.get("userID", function (result) {
 });
 
 
-function sendProductPriceToServer() {
+function saveCarToServer() {
     const productPriceDiv = document.querySelector('.product-price__i');
-
-
-    console.log(window.location.href)
-
     if (productPriceDiv) {
         const productPrice = productPriceDiv.innerText.trim();
         const endpointUrl = 'http://localhost:8080/save/car?price='
@@ -27,6 +23,28 @@ function sendProductPriceToServer() {
             });
     }
 }
+
+
+function deleteCarFromServer() {
+    const endpointUrl = 'http://localhost:8080/delete/car?&chatId=' + userId + '&url=' + window.location.href;
+    fetch(endpointUrl, {
+        method: 'DELETE'
+    })
+}
+
+// function deleteCarFromServer() {
+//     const endpointUrl = 'http://localhost:8080/delete/car?&chatId='
+//         + userId + '&url='
+//         + window.location.href;
+//     fetch(endpointUrl)
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log('Response:', data);
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+// }
 
 const container = document.querySelector('.tz-container');
 const backDiv = document.createElement('div');
@@ -54,7 +72,7 @@ const whiteContainer = document.querySelector('.white-back');
 
 const button = document.createElement('button');
 button.textContent = 'Avtomobili izləməyə al';
-button.addEventListener('click', sendProductPriceToServer);
+button.addEventListener('click', saveCarToServer);
 
 button.style.display = 'inline-block';
 button.style.margin = '10px';
@@ -88,7 +106,7 @@ if (whiteContainer) {
 
 const buttonSearch = document.createElement('button');
 buttonSearch.textContent = 'Avtomobili izləmədən çıxar';
-buttonSearch.addEventListener('click', sendProductPriceToServer);
+buttonSearch.addEventListener('click', deleteCarFromServer);
 
 buttonSearch.style.display = 'inline-block';
 buttonSearch.style.margin = '10px';
