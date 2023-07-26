@@ -32,19 +32,6 @@ function deleteCarFromServer() {
     })
 }
 
-// function deleteCarFromServer() {
-//     const endpointUrl = 'http://localhost:8080/delete/car?&chatId='
-//         + userId + '&url='
-//         + window.location.href;
-//     fetch(endpointUrl)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log('Response:', data);
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//         });
-// }
 
 const container = document.querySelector('.tz-container');
 const backDiv = document.createElement('div');
@@ -55,7 +42,7 @@ backDiv.style.height = '13%';
 backDiv.style.backgroundColor = 'white'; // Update background color to red
 backDiv.style.color = 'white';
 backDiv.style.position = 'fixed'; // Position the button on top of all layers
-backDiv.style.zIndex = '9998'; // Set a high z-index to ensure it's on top
+backDiv.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
 backDiv.style.border = 'none'; // Remove the border
 backDiv.style.borderRadius = '5px'; // Add border radius for a modern look
 backDiv.style.cursor = 'pointer';
@@ -83,7 +70,7 @@ button.style.height = '40px';
 button.style.backgroundColor = 'red'; // Update background color to red
 button.style.color = 'white';
 button.style.position = 'center'; // Position the button on top of all layers
-button.style.zIndex = '9999'; // Set a high z-index to ensure it's on top
+button.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
 button.style.border = 'none'; // Remove the border
 button.style.borderRadius = '5px'; // Add border radius for a modern look
 button.style.cursor = 'pointer';
@@ -116,7 +103,7 @@ buttonSearch.style.height = '40px';
 buttonSearch.style.backgroundColor = 'red'; // Update background color to red
 buttonSearch.style.color = 'white';
 buttonSearch.style.position = 'center'; // Position the button on top of all layers
-buttonSearch.style.zIndex = '9999'; // Set a high z-index to ensure it's on top
+buttonSearch.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
 buttonSearch.style.border = 'none'; // Remove the border
 buttonSearch.style.borderRadius = '5px'; // Add border radius for a modern look
 buttonSearch.style.cursor = 'pointer';
