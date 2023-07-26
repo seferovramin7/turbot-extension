@@ -1,25 +1,26 @@
 {
-    "name": "Turbot",
-    "manifest_version": 3,
-    "version": "1.0",
-    "permissions": [
-      "storage"
-    ],
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "background": {
-      "service_worker": "background.js"
-    },
-    "host_permissions": [
-      "https://*/*",
-      "http://*/*"
-    ],
-    "content_scripts": [
-      {
-        "matches": ["https://*/*", "http://*/*"],
-        "js": ["content.js"]
-      }
-    ]
-  }
-  
+  "name": "Turbot",
+  "manifest_version": 3,
+  "version": "1.0",
+  "icons": {
+    "48": "turbo.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+
+  },
+  "host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
