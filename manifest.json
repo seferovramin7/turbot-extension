@@ -15,6 +15,7 @@
     },
     "host_permissions": [
       "https://*/*",
+      "https://turbo.az",
       "http://*/*"
     ],
     "content_scripts": [

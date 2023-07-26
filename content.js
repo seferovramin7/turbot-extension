@@ -21,7 +21,7 @@ function sendProductPriceToServer() {
     }
 }
 
-const container = document.querySelector('.product-phones__btn');
+const container = document.querySelector('.tz-container');
 const backDiv = document.createElement('div');
 backDiv.className = 'white-back';
 backDiv.style.display = 'inline-block';
