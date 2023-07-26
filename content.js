@@ -7,9 +7,16 @@ chrome.storage.sync.get("userID", function (result) {
 function sendProductPriceToServer() {
     const productPriceDiv = document.querySelector('.product-price__i');
 
+
+    console.log(window.location.href)
+
     if (productPriceDiv) {
         const productPrice = productPriceDiv.innerText.trim();
-        const endpointUrl = 'http://localhost:8080/save?price=' + encodeURIComponent(productPrice) + '&id=' + userId;
+        const endpointUrl = 'http://localhost:8080/save/car?price='
+            + encodeURIComponent(productPrice)
+            + '&chatId='
+            + userId + '&url='
+            + window.location.href;
         fetch(endpointUrl)
             .then(response => response.json())
             .then(data => {
