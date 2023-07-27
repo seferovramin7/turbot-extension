@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('http://localhost:8080/list/search?chatId=' + userId)
         .then(response => response.json())
         .then(data => {
-            var selectElement = document.querySelector('select[name="searchLinksDropdown"]');
+            const selectElement = document.querySelector('select[name="searchLinksDropdown"]');
 
 
             data.forEach(link => {

@@ -91,8 +91,6 @@ button.addEventListener('mouseout', function () {
 });
 if (whiteContainer) {
     whiteContainer.appendChild(button);
-} else {
-    console.error('Container element not found.');
 }
 
 
@@ -124,6 +122,4 @@ buttonSearch.addEventListener('mouseout', function () {
 });
 if (whiteContainer) {
     whiteContainer.appendChild(buttonSearch);
-} else {
-    console.error('Container element not found.');
 }
