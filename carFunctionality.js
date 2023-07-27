@@ -41,8 +41,8 @@ backDiv.style.width = '20%';
 backDiv.style.height = '13%';
 backDiv.style.backgroundColor = 'white'; // Update background color to red
 backDiv.style.color = 'white';
-backDiv.style.position = 'fixed'; // Position the button on top of all layers
-backDiv.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
+backDiv.style.position = 'fixed';
+backDiv.style.zIndex = '999999999';
 backDiv.style.border = 'none'; // Remove the border
 backDiv.style.borderRadius = '5px'; // Add border radius for a modern look
 backDiv.style.cursor = 'pointer';
@@ -52,7 +52,12 @@ backDiv.style.boxShadow = '0px 2px 4px rgba(0, 0, 0, 0.2)';
 backDiv.style.top = '10px'; // Align the button 10px from the top
 backDiv.style.right = '10px';
 backDiv.style.transition = 'background-color 0.3s ease';
-container.appendChild(backDiv);
+
+
+console.log(document.querySelector('.product-description__content'))
+if (document.querySelector('.product-description__content') != null){
+    container.appendChild(backDiv);
+}
 
 const whiteContainer = document.querySelector('.white-back');
 
@@ -103,7 +108,7 @@ buttonSearch.style.height = '40px';
 buttonSearch.style.backgroundColor = 'red'; // Update background color to red
 buttonSearch.style.color = 'white';
 buttonSearch.style.position = 'center'; // Position the button on top of all layers
-buttonSearch.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
+buttonSearch.style.zIndex = '9999'; // Set a high z-index to ensure it's on top
 buttonSearch.style.border = 'none'; // Remove the border
 buttonSearch.style.borderRadius = '5px'; // Add border radius for a modern look
 buttonSearch.style.cursor = 'pointer';
