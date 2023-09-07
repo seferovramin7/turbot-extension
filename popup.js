@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8080/list/car?chatId=' + userId)
+    fetch(turboBackUrl + '/list/car?chatId=' + userId)
         .then(response => response.json())
         .then(data => {
             var selectElement = document.querySelector('select[name="carLinksDropdown"]');
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:8080/list/search?chatId=' + userId)
+    fetch(turboBackUrl + '/list/search?chatId=' + userId)
         .then(response => response.json())
         .then(data => {
             const selectElement = document.querySelector('select[name="searchLinksDropdown"]');

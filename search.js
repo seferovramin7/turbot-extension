@@ -1,4 +1,3 @@
-// Function to check if the URL contains the "q[make]" query parameter
 function hasQueryParam() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.has('q[make]');
