@@ -19,7 +19,8 @@
   "content_scripts": [
     {
       "matches": ["https://*/*", "http://*/*"],
-      "js": ["carFunctionality.js", "searchFunctionality.js"]
+      "js": ["carFunctionality.js", "searchFunctionality.js"],
+      "css": ["styles.css"]
     }
   ]
 }

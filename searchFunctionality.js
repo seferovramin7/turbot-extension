@@ -54,51 +54,66 @@ function deleteSearchFromServer() {
 const mainTurboContainer = document.querySelector('.tz-container');
 const mainWhiteBackDiv = document.createElement('div');
 mainWhiteBackDiv.className = 'white-back';
-mainWhiteBackDiv.style.display = 'inline-block';
-mainWhiteBackDiv.style.width = '20%';
-mainWhiteBackDiv.style.height = '13%';
-mainWhiteBackDiv.style.backgroundColor = 'white'; // Update background color to red
-mainWhiteBackDiv.style.color = 'white';
-mainWhiteBackDiv.style.position = 'fixed'; // Position the buttonSearch on top of all layers
-mainWhiteBackDiv.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
-mainWhiteBackDiv.style.border = 'none'; // Remove the border
-mainWhiteBackDiv.style.borderRadius = '5px'; // Add border radius for a modern look
-mainWhiteBackDiv.style.cursor = 'pointer';
-mainWhiteBackDiv.style.fontFamily = 'Arial, sans-serif';
-mainWhiteBackDiv.style.textShadow = '1px 1px 1px rgba(0, 0, 0, 0.2)';
-mainWhiteBackDiv.style.boxShadow = '0px 2px 4px rgba(0, 0, 0, 0.2)';
-mainWhiteBackDiv.style.top = '10px'; // Align the buttonSearch 10px from the top
-mainWhiteBackDiv.style.right = '10px';
-mainWhiteBackDiv.style.transition = 'background-color 0.3s ease';
+
+let averagePriceText = '';
+
+
+const secondaryWhiteBackDiv = document.createElement('div');
+secondaryWhiteBackDiv.className = 'secondary-white-back';
+
 
 if (window.location.href.includes('?q')) {
     mainTurboContainer.appendChild(mainWhiteBackDiv);
+    mainTurboContainer.appendChild(secondaryWhiteBackDiv);
+
+    function convertToAZN(price, currency) {
+        switch (currency) {
+            case "€":
+                return price * 1.82;
+            case "$":
+                return price * 1.70;
+            default:
+                return price;
+        }
+    }
+
+// Extract product prices and currencies
+    const productPrices = [];
+    const productPriceElements = document.querySelectorAll('.products .product-price');
+
+    productPriceElements.forEach((element) => {
+        const price = parseFloat(element.textContent.trim().replace(/\s+/g, '').replace(',', '.'));
+        const currency = element.querySelector('span').textContent.trim();
+        const priceInAZN = convertToAZN(price, currency);
+        productPrices.push(priceInAZN);
+    });
+
+// Calculate the average price in AZN
+    const totalPriceInAZN = productPrices.reduce((acc, curr) => acc + curr, 0);
+    const averagePriceInAZN = totalPriceInAZN / productPrices.length;
+
+// Convert average price to EUR and USD
+    const averagePriceInEUR = averagePriceInAZN / 1.82;
+    const averagePriceInUSD = averagePriceInAZN / 1.70;
+
+    averagePriceText = `Ortalama qiymət : 
+    <br> ${averagePriceInAZN.toFixed(0)} ₼     
+    <br> ${averagePriceInEUR.toFixed(0)} € 
+    <br> ${averagePriceInUSD.toFixed(0)} $`;
 }
 
+const averagePriceDiv = document.createElement('div');
+averagePriceDiv.className = 'average-price-div';
+averagePriceDiv.innerHTML = averagePriceText;
 
-const saveButton = document.createElement('button');
+
 var isSaveButtonClicked = false;
 
+const saveButton = document.createElement('button');
+saveButton.className = 'save-button';
 saveButton.textContent = 'Axtarışı başlat';
 saveButton.addEventListener('click', saveSearchToServer);
 
-saveButton.style.display = 'inline-block';
-saveButton.style.margin = '10px';
-saveButton.style.padding = '10px';
-
-saveButton.style.width = '300px';
-saveButton.style.height = '40px';
-saveButton.style.backgroundColor = 'red'; // Update background color to red
-saveButton.style.color = 'white';
-saveButton.style.position = 'center'; // Position the buttonSearch on top of all layers
-saveButton.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
-saveButton.style.border = 'none'; // Remove the border
-saveButton.style.borderRadius = '5px'; // Add border radius for a modern look
-saveButton.style.cursor = 'pointer';
-saveButton.style.fontFamily = 'Arial, sans-serif';
-saveButton.style.textShadow = '1px 1px 1px rgba(0, 0, 0, 0.2)';
-saveButton.style.boxShadow = '0px 2px 4px rgba(0, 0, 0, 0.2)';
-saveButton.style.transition = 'background-color 0.3s ease';
 
 saveButton.addEventListener('click', function () {
     isSaveButtonClicked = true;
@@ -126,10 +141,6 @@ saveButton.addEventListener('mouseleave', function () {
     }
 });
 
-
-if (mainWhiteBackDiv) {
-    mainWhiteBackDiv.appendChild(saveButton);
-}
 
 const deleteButton = document.createElement('button');
 var isDeleteButtonClicked = false;
@@ -177,5 +188,9 @@ deleteButton.addEventListener('mouseleave', function () {
     }
 });
 if (mainWhiteBackDiv) {
+    mainWhiteBackDiv.appendChild(saveButton);
     mainWhiteBackDiv.appendChild(deleteButton);
+}
+if (secondaryWhiteBackDiv) {
+    secondaryWhiteBackDiv.appendChild(averagePriceDiv);
 }
