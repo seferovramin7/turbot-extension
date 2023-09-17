@@ -62,7 +62,7 @@ const secondaryWhiteBackDiv = document.createElement('div');
 secondaryWhiteBackDiv.className = 'secondary-white-back';
 
 
-if (window.location.href.includes('?q')) {
+if (window.location.href.includes('&q')) {
     mainTurboContainer.appendChild(mainWhiteBackDiv);
     mainTurboContainer.appendChild(secondaryWhiteBackDiv);
 
@@ -90,21 +90,69 @@ if (window.location.href.includes('?q')) {
 
 // Calculate the average price in AZN
     const totalPriceInAZN = productPrices.reduce((acc, curr) => acc + curr, 0);
-    const averagePriceInAZN = totalPriceInAZN / productPrices.length;
+    let averagePriceInAZN = (totalPriceInAZN / productPrices.length).toFixed(0);
 
-// Convert average price to EUR and USD
-    const averagePriceInEUR = averagePriceInAZN / 1.82;
-    const averagePriceInUSD = averagePriceInAZN / 1.70;
+    let minimumPriceInAZN = Math.min(...productPrices);
+    let maximumPriceInAZN = Math.max(...productPrices);
 
-    averagePriceText = `Ortalama qiymət : 
-    <br> ${averagePriceInAZN.toFixed(0)} ₼     
-    <br> ${averagePriceInEUR.toFixed(0)} € 
-    <br> ${averagePriceInUSD.toFixed(0)} $`;
+    let minimumPriceInEUR = (minimumPriceInAZN / 1.82).toFixed(0);
+    let minimumPriceInUSD = (minimumPriceInAZN / 1.70).toFixed(0);
+
+    let averagePriceInEUR = (averagePriceInAZN / 1.82).toFixed(0);
+    let averagePriceInUSD = (averagePriceInAZN / 1.70).toFixed(0);
+
+    let maximumPriceInEUR = (maximumPriceInAZN / 1.82).toFixed(0);
+    let maximumPriceInUSD = (maximumPriceInAZN / 1.70).toFixed(0);
+
+    headerText = `Cari səhifədəki maşınların qiyməti : `;
+
+
+    minimumPriceInAZN = convertToFormattedNumber(minimumPriceInAZN);
+    minimumPriceInEUR = convertToFormattedNumber(minimumPriceInEUR);
+    minimumPriceInUSD = convertToFormattedNumber(minimumPriceInUSD);
+
+    averagePriceInAZN = convertToFormattedNumber(averagePriceInAZN);
+    averagePriceInEUR = convertToFormattedNumber(averagePriceInEUR);
+    averagePriceInUSD = convertToFormattedNumber(averagePriceInUSD);
+
+    maximumPriceInAZN = convertToFormattedNumber(maximumPriceInAZN);
+    maximumPriceInEUR = convertToFormattedNumber(maximumPriceInEUR);
+    maximumPriceInUSD = convertToFormattedNumber(maximumPriceInUSD);
+
+    minimumPriceText = `Minimum <br>
+    <br> ${minimumPriceInAZN} ₼     
+    <br> ${minimumPriceInEUR} € 
+    <br> ${minimumPriceInUSD} $`;
+
+    averagePriceText = `Ortalama <br>
+    <br> ${averagePriceInAZN} ₼     
+    <br> ${averagePriceInEUR} € 
+    <br> ${averagePriceInUSD} $`;
+
+    maximumPriceText = `Maksimum <br>
+    <br> ${maximumPriceInAZN} ₼     
+    <br> ${maximumPriceInEUR} € 
+    <br> ${maximumPriceInUSD} $`;
 }
+
+const headerTextDiv = document.createElement('div');
+headerTextDiv.className = 'header-text-div';
+headerTextDiv.innerHTML = headerText;
+
+const minimumPriceDiv = document.createElement('div');
+minimumPriceDiv.className = 'average-price-div';
+minimumPriceDiv.style.backgroundColor = '#FF3333';
+minimumPriceDiv.innerHTML = minimumPriceText;
 
 const averagePriceDiv = document.createElement('div');
 averagePriceDiv.className = 'average-price-div';
+averagePriceDiv.style.backgroundColor = '#FF0000';
 averagePriceDiv.innerHTML = averagePriceText;
+
+const maximumPriceDiv = document.createElement('div');
+maximumPriceDiv.className = 'average-price-div';
+maximumPriceDiv.style.backgroundColor = '#CC0000';
+maximumPriceDiv.innerHTML = maximumPriceText;
 
 
 var isSaveButtonClicked = false;
@@ -147,22 +195,7 @@ var isDeleteButtonClicked = false;
 
 deleteButton.textContent = 'Axtarışdan çıxar';
 deleteButton.addEventListener('click', deleteSearchFromServer);
-deleteButton.style.display = 'inline-block';
-deleteButton.style.margin = '10px';
-deleteButton.style.padding = '10px';
-deleteButton.style.width = '300px';
-deleteButton.style.height = '40px';
-deleteButton.style.backgroundColor = 'red'; // Update background color to red
-deleteButton.style.color = 'white';
-deleteButton.style.position = 'center'; // Position the buttonSearch on top of all layers
-deleteButton.style.zIndex = '999999999'; // Set a high z-index to ensure it's on top
-deleteButton.style.border = 'none'; // Remove the border
-deleteButton.style.borderRadius = '5px'; // Add border radius for a modern look
-deleteButton.style.cursor = 'pointer';
-deleteButton.style.fontFamily = 'Arial, sans-serif';
-deleteButton.style.textShadow = '1px 1px 1px rgba(0, 0, 0, 0.2)';
-deleteButton.style.boxShadow = '0px 2px 4px rgba(0, 0, 0, 0.2)';
-deleteButton.style.transition = 'background-color 0.3s ease';
+deleteButton.className = 'delete-button';
 deleteButton.addEventListener('click', function () {
     isDeleteButtonClicked = true;
     deleteButton.style.backgroundColor = 'grey';
@@ -192,5 +225,19 @@ if (mainWhiteBackDiv) {
     mainWhiteBackDiv.appendChild(deleteButton);
 }
 if (secondaryWhiteBackDiv) {
+    secondaryWhiteBackDiv.appendChild(headerTextDiv);
+    secondaryWhiteBackDiv.appendChild(minimumPriceDiv);
     secondaryWhiteBackDiv.appendChild(averagePriceDiv);
+    secondaryWhiteBackDiv.appendChild(maximumPriceDiv);
+
+}
+
+function convertToFormattedNumber(number) {
+    if (number < 1000) {
+        return number.toFixed(3);
+    }
+    const numberString = number.toString();
+    const firstPart = numberString.slice(0, -3);
+    const secondPart = numberString.slice(-3);
+    return `${firstPart}.${(secondPart / 1000).toFixed(3).slice(2)}`;
 }
